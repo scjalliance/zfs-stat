@@ -22,4 +22,4 @@ while read POOL; do
 	curl -d "stat=zfs $POOLNAME USEDREFRESERV&ezkey=$EZKEY&value=$USEDREFRESERV" https://api.stathat.com/ez &
 	USEDCHILD="$(cut -d' ' -f7 <<< $POOL)"
 	curl -d "stat=zfs $POOLNAME USEDCHILD&ezkey=$EZKEY&value=$USEDCHILD" https://api.stathat.com/ez &
-done < <(zfs list -po space /*-{tank,guest} | tail -n+2 | tr -s ' ')
+done < <(/sbin/zfs list -pro space /*-{tank,guest} | tail -n+2 | tr -s ' ')
